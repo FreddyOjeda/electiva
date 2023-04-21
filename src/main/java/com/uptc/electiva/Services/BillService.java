@@ -27,12 +27,8 @@ public class BillService {
             return null;
         }else {
             if (customerReposity.findById(id).isPresent()){
-                if (bill.getTypePay().equals('E') || bill.getTypePay().equals('O') || bill.getTypePay().equals('C')){
-                    bill.setCustomer(customerReposity.findById(id).get());
-                    return reposity.save(bill);
-                }else{
-                    return null;
-                }
+                bill.setCustomer(customerReposity.findById(id).get());
+                return reposity.save(bill);
             }else{
                 return null;
             }
