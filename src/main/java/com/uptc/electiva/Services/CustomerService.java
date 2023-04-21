@@ -18,7 +18,11 @@ public class CustomerService {
         if (reposity.findById(customer.getIdCustomer()).isPresent()){
             return null;
         }else {
-            return reposity.save(customer);
+            if (customer.getGender().equals('M') || customer.getGender().equals('F') ){
+                return reposity.save(customer);
+            }else {
+                return null;
+            }
         }
     }
 
