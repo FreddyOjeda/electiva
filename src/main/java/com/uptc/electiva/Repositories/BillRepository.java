@@ -14,7 +14,8 @@ public interface BillRepository extends JpaRepository<BillEntity,String> {
 
     //List<BillEntity> findByType_pay(Pay type_pay);
     List<BillEntity> findByCustomer(CustomerEntity customer);
-    //List<BillEntity> findByDate_billBetween(LocalDate startDate, LocalDate endDate);
+    List<BillEntity> findByDateBetween(LocalDate startDate, LocalDate endDate);
+    List<BillEntity> findByTypePay(String pay);
 
 
 

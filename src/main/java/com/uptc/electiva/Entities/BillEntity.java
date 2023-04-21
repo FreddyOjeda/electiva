@@ -11,10 +11,12 @@ import java.time.LocalDate;
 public class BillEntity {
     @Id
     private String number;
-    private LocalDate date_bill;
+    private LocalDate date;
 
-    @Enumerated(EnumType.STRING)
-    private Pay type_pay;
+    /*@Enumerated(EnumType.STRING)
+    private Pay typePay;*/
+
+    private String typePay;
 
     private BigDecimal total;
 
@@ -36,20 +38,20 @@ public class BillEntity {
         this.number = number;
     }
 
-    public LocalDate getDate_bill() {
-        return date_bill;
+    public LocalDate getDate() {
+        return date;
     }
 
-    public void setDate_bill(LocalDate date_bill) {
-        this.date_bill = date_bill;
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
-    public Pay getType_pay() {
-        return type_pay;
+    public String getTypePay() {
+        return typePay;
     }
 
-    public void setType_pay(Pay type_pay) {
-        this.type_pay = type_pay;
+    public void setTypePay(String typePay) {
+        this.typePay = typePay;
     }
 
     public BigDecimal getTotal() {

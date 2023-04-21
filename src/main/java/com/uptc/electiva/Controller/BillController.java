@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -29,10 +30,24 @@ public class BillController {
         return new ResponseEntity<>(bill, HttpStatus.OK);
     }
 
+    @GetMapping("/customer/{id}")
+    public ResponseEntity getBillByCustomer(@PathVariable int id) {
+        return ResponseEntity.status(HttpStatus.OK).body(billService.findByCustomer(id));
+    }
+
+    @GetMapping("/pay/{id}")
+    public ResponseEntity getBillByPay(@PathVariable String id) {
+        return ResponseEntity.status(HttpStatus.OK).body(billService.findByPay(id));
+    }
+    @GetMapping("/date/{start}/{end}")
+    public ResponseEntity getBillByDate(@PathVariable LocalDate start,@PathVariable LocalDate end) {
+        return ResponseEntity.status(HttpStatus.OK).body(billService.findByDate(start,end));
+    }
+
     @PostMapping("/{id}")
     public ResponseEntity<BillEntity> createBill(@RequestBody BillEntity billDto,@PathVariable int id) {
-        BillEntity createdBill = billService.save(billDto,id);
-        return new ResponseEntity<>(createdBill, HttpStatus.CREATED);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(billService.save(billDto,id));
     }
 
     @PutMapping("/{id}")

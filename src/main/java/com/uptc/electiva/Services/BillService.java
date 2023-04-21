@@ -8,6 +8,7 @@ import com.uptc.electiva.Repositories.CustomerReposity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,6 +36,35 @@ public class BillService {
         }
     }
 
+    public List<BillEntity> findByCustomer(int id){
+        Optional<CustomerEntity> optional = customerReposity.findById(id);
+        if (optional.isPresent()){
+            return reposity.findByCustomer(optional.get());
+        }else{
+            return null;
+        }
+    }
+
+    public List<BillEntity> findByPay(String id){
+        /*Optional<CustomerEntity> optional = customerReposity.findById(id);
+        if (optional.isPresent()){
+            return reposity.findByCustomer(optional.get());
+        }else{
+            return null;
+        }*/
+        return reposity.findByTypePay(id);
+    }
+
+    public List<BillEntity> findByDate(LocalDate start,LocalDate end){
+        /*Optional<CustomerEntity> optional = customerReposity.findById(id);
+        if (optional.isPresent()){
+            return reposity.findByCustomer(optional.get());
+        }else{
+            return null;
+        }*/
+        return reposity.findByDateBetween(start,end);
+    }
+
     public List<BillEntity> findAll(){
         return  reposity.findAll();
     }
@@ -53,10 +83,10 @@ public class BillService {
         BillEntity bill = reposity.findById(id).get();
 
         if (bill!=null){
-            bill.setDate_bill(newBill.getDate_bill());
-            bill.setCustomer(newBill.getCustomer());
+            bill.setDate(newBill.getDate());
+            //bill.setCustomer(newBill.getCustomer());
             bill.setTotal(newBill.getTotal());
-            bill.setType_pay(newBill.getType_pay());
+            bill.setTypePay(newBill.getTypePay());
             return reposity.save(bill);
         }else{
             return null;
